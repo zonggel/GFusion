@@ -1,0 +1,11 @@
+This package is to recover the events from the reports, solving information fusion problem.
+
+analysis.m: random report generation with certain RN/RD range. This is to study the reconstruction by smoothness/sparsity/periodicity, depending on given RN and RD for NY measles data.
+
+analysis_overlap_rd_f: this is to study the reconstruction by smoothness method, depending on RD and sampling frequency (I use the samping interval as the indicator, the larger the interval, the smaller the sampling frequency).
+
+analysis_overlap_rd_v: this is to study the reconstruction by smoothness method, depending on RD and overlap ratio (ratio = overlaping_timeticks/RD).
+
+Execute and check analyse.m for more details. The functions are all placed in src/ and the data are all place in data/. 
+
+For any questions, please email me at zonggel@andrew.cmu.edu.

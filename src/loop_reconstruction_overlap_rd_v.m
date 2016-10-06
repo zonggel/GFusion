@@ -1,4 +1,4 @@
-function [ Out ] = loop_reconstruction_overlap_rd_v( events, lambdas,configs,num_loop, f_smooth,f_sparse,f_pd,savelabel )
+function [ Out ] = loop_reconstruction_overlap_rd_v( events, lambdas, alphas,configs,num_loop, f_smooth,f_sparse,f_pd,savelabel )
 tic;
 i = 1;
 
@@ -61,7 +61,7 @@ for icfg = 1:size(configs,1)
                  end
 
                  if f_pd == 1
-                    [~, reconstruction_error, reconstruction_param] = sp_reconstruct(A, y,lambdas, events);
+                    [~, reconstruction_error, reconstruction_param] = sp_reconstruct(A, y,lambdas, alphas, events);
                     pderror = pderror + min(reconstruction_error(:));
                     [pderrors(ii),minid] =  min(reconstruction_error(:));
                     [~,mi2,mi3] = ind2sub(size(reconstruction_error),minid);

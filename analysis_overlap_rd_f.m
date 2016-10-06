@@ -9,6 +9,7 @@ events = events(1:400);
 
 %define lambda
 lambdas = 10.^(-10:1:10);
+alphas = 0.1:0.1:0.9;
 celld = [1,2:2:40];
 cellf = [1,2:2:60];
 nd = length(celld);
@@ -22,10 +23,10 @@ end
 %now reconstruction specify the method
 f_smooth = 1;
 f_sparse = 0;
-f_sp = 0;
+f_sp = 1;
 
 num_loop = 1;
-[ Out ] = loop_reconstruction_overlap_rd_f( events, lambdas,configs,num_loop,f_smooth,f_sparse,f_sp,'loop_nymeasle_');%function to generate 2-D plot
+[ Out ] = loop_reconstruction_overlap_rd_f( events, lambdas, alphas,configs,num_loop,f_smooth,f_sparse,f_sp,'loop_nymeasle_');%function to generate 2-D plot
 
 xdim = nf;
 ydim = nd;

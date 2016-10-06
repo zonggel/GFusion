@@ -1,7 +1,4 @@
-function first_paper_figure_gen( Out, events,lambdas)
-Nevents = length(events);
-P = 52;
-xline = Nevents/50*Nevents/P;
+function first_paper_figure_gen_group( Out,lambdas)
 
 totalnum = length(Out);
 minvalp = zeros(totalnum,1);
@@ -11,8 +8,6 @@ minvalpd = zeros(totalnum,1);
 
 minarraysm = zeros(totalnum,1);
 minvalsm = zeros(totalnum,1);
-maxarraysm = zeros(totalnum,1);
-maxvalsm = zeros(totalnum,1);
 minvalsp = zeros(totalnum,1);
 
 Xs = zeros(totalnum,1);
@@ -25,13 +20,10 @@ for i = 1:length(Out)
     minvalp(i) = mean(tempout.perrors(:));
     minvalpd(i) = mean(tempout.pderrors(:));
     minvalsm(i) = mean(tempout.smerrors(:));
-    maxvalsm(i) = mean(tempout.smerrors2(:));
     minvalsp(i) = mean(tempout.sperrors(:));
     
     smparams = lambdas(tempout.smparams(:));
     minarraysm(i) = 10^(mean(log10(smparams)));
-    smparams2 = lambdas(tempout.smparams2(:));
-    maxarraysm(i) = 10^(mean(log10(smparams2)));
    
     Xs(i) = tempout.muvars(1);
     Ys(i) = tempout.muvars(3);
@@ -66,32 +58,49 @@ pcolor(Xs,Ys,minvalsm);
 colorbar;
 xlabel('RN');
 ylabel('RD');
-title('Smooth MSE');
+title('Smoothness MSE');
 
 figure;
-pcolor(Xs,Ys,minvalsm);
+pcolor(Xs,Ys,minvalsm./minvalp);
 colorbar;
 xlabel('RN');
 ylabel('RD');
-title('Smooth/Peudo-Inverse MSE');
+title('Smoothness/Peudo-Inverse MSE');
+
+
+
+figure;
+pcolor(Xs,Ys,minvalpd);
+colorbar;
+xlabel('RN');
+ylabel('RD');
+title('Periodicity MSE');
+
+figure;
+pcolor(Xs,Ys,minvalpd./minvalsm);
+colorbar;
+xlabel('RN');
+ylabel('RD');
+title('Periodicity/Smoothness MSE');
 
 figure;
 plot(rns,minvalp(1,:),'b--',rns,minvalp(round((1+ydim)/2),:),'b+',rns,minvalp(end,:),'b*');
 hold on
-plot(rns,minvalsp(1,:),'r--',rns,minvalsp(round((1+ydim)/2),:),'r+',rns,minvalsp(end,:),'r*');
-hold on
+%plot(rns,minvalsp(1,:),'r--',rns,minvalsp(round((1+ydim)/2),:),'r+',rns,minvalsp(end,:),'r*');
+%hold on
 plot(rns,minvalsm(1,:),'g--',rns,minvalsm(round((1+ydim)/2),:),'g+',rns,minvalsm(end,:),'g*');
 hold on
 plot(rns,minvalpd(1,:),'c--',rns,minvalpd(round((1+xdim)/2),:),'c+',rns,minvalpd(end,:),'c*');
 legend(sprintf('Pseudo-Inverse:RD=%d',rds(1)),sprintf('Pseudo-Inverse:RD=%d',rds(round((1+ydim)/2))),sprintf('Pseudo-Inverse:RD=%d',rds(end)),...
-    sprintf('Sparsity:RD=%d',rds(1)),sprintf('Sparsity:RD=%d',rds(round((1+ydim)/2))),sprintf('Sparsity:RD=%d',rds(end)),...
     sprintf('Smoothness:RD=%d',rds(1)),sprintf('Smoothness:RD=%d',rds(round((1+ydim)/2))),sprintf('Smoothness:RD=%d',rds(end)),...
     sprintf('Periodicity:RD=%d',rds(1)),sprintf('Periodicity:RD=%d',rds(round((1+ydim)/2))),sprintf('Periodicity:RD=%d',rds(end)))
+    %sprintf('Sparsity:RD=%d',rds(1)),sprintf('Sparsity:RD=%d',rds(round((1+ydim)/2))),sprintf('Sparsity:RD=%d',rds(end)),...
+
 %hold on
 %y1=get(gca,'ylim');
 %plot([xline  xline],y1);
 xlabel('RN')
-ylabel('Minimal MSE')
+ylabel('MSE')
 
 % figure;
 % plot(rns,minvalp(1,:),'b--',rns,minvalp(17,:),'b+',rns,minvalp(33,:),'b*');
@@ -119,7 +128,7 @@ legend(sprintf('Pseudo-Inverse:RN=%d',rns(1)),sprintf('Pseudo-Inverse:RN=%d',rns
     sprintf('Periodicity:RN=%d',rns(1)),sprintf('Periodicity:RN=%d',rns(round((1+xdim)/2))),sprintf('Periodicity:RN=%d',rns(end)));
 
 xlabel('RD')
-ylabel('Minimal MSE')
+ylabel('MSE')
 
 
 end

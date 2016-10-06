@@ -1,7 +1,6 @@
-function [recon_events, recon_error,recon_params]=sp_reconstruct(A, y,lambdas,events)
-alphas = 0.1:0.1:0.9;
+function [recon_events, recon_error,recon_params]=sp_reconstruct(A, y,lambdas, alphas,events)
 sphat = zeros(length(events),length(lambdas),length(alphas));
-T = 51;
+T = 52;
 recon_params = zeros(2,length(lambdas),length(alphas));
 for i=1:length(lambdas)
     for j=1:length(alphas)

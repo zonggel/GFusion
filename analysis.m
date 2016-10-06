@@ -9,6 +9,7 @@ events = events(1:400);
 
 %define lambda
 lambdas = 10.^(-10:1:10);
+alphas = 0.1:0.1:0.9;
 
 %define rn/rd grid
 config_rep_num = zeros(33,2);
@@ -24,14 +25,9 @@ ydim = size(config_rep_dur,1);
 f_smooth = 1;
 f_sparse = 1;
 f_sp = 1;
-Out = reconstruction( events, lambdas,config_rep_num,config_rep_dur,f_smooth,f_sparse,f_sp,'_nymeasle_' );
 
-
-
-%function to generate 2-D plot/smoothing (the default)
-%params_2D( Out, lambdas, xdim, ydim );
-%function to generate 2-D plot/smoothing + periodic
-params_2D_sp( Out,events, lambdas, xdim, ydim );
+num_loop = 100;
+Out = loop_reconstruction( events, lambdas, alphas,config_rep_num,config_rep_dur, num_loop,f_smooth,f_sparse,f_sp,'loop_nymeasle_' );
 
 %function to generate 2-D plot
 %params_2D( Out, lambdas, xdim, ydim );

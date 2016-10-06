@@ -8,6 +8,7 @@ events = events(1:400);
 
 %define lambda
 lambdas = 10.^(-10:1:10);
+alphas = 0.1:0.1:0.9;
 celld = 1:1:100;
 cello = 0.0:0.1:0.9;
 nd = length(celld);
@@ -26,7 +27,7 @@ f_smooth = 1;
 f_sparse = 0;
 f_sp = 0;
 num_loop = 1;
-[ Out ] = loop_reconstruction_overlap_rd_v( events, lambdas,configs,num_loop,f_smooth,f_sparse,f_sp,'loop_nymeasle_');
+[ Out ] = loop_reconstruction_overlap_rd_v( events, lambdas, alphas,configs,num_loop,f_smooth,f_sparse,f_sp,'loop_nymeasle_');
 xdim = no;
 ydim = nd;
 

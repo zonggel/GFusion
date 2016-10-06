@@ -8,7 +8,7 @@ ny_measles = events;
 fm=fft(ny_measles);
 %mask = abs(fm) > max(abs(fm))/30;
 mask = zeros(length(ny_measles),1);
-num_kept = 20;
+num_kept = 9;
 mask(1:num_kept) = 1;
 mask(end+1-num_kept:end) = 1;
 %mask = abs(fm) > max(abs(fm))/30;
@@ -34,7 +34,7 @@ C = C(mask==0,:);
 
 %fft reconstruction
 estimated_ny_measles = pinv([A; C])*[y; zeros(r,1)];
-estimated_ny_measles = real(estimated_ny_measles);
+estimated_ny_measles = abs(estimated_ny_measles);
 
 %smoothness reconstruction
 [smoothhat,smootherror] = smooth_reconstruct(A, y,lambdas,ny_measles);
@@ -89,11 +89,9 @@ hold on
 plot(estimated_ny_measles,'g');
 hold on
 plot(smoothhat,'r')
-hold on
-plot(sphat,'m')
 %hold on;
 %plot(cov,zeros(length(cov)),'b+');
-legend('Truth','Muffle','Smoothness','Peroidicity');
+legend('Truth','Muffle','Smoothness');
 title(sprintf('case: rn = %d, rd = %d',rn,rd));
 
 

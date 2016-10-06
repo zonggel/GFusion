@@ -43,7 +43,8 @@ config_rep_dur = zeros(2,2);
 config_rep_dur(:,1) =  [40,80];
 first_paper_figure_gen_lambda(events, lambdas, alphas,config_rep_num,config_rep_dur, num_loop,f_smooth,f_sparse,f_sp,'loop_nymeasle_');
 
-
+rn = 20;
+rd = 20;
 lambdas = 10.^(-10:1:10);
 first_paper_figure_lambda_fourier(events, lambdas, rn, rd);
 

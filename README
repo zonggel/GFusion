@@ -6,6 +6,8 @@ analysis_overlap_rd_f: this is to study the reconstruction by smoothness method,
 
 analysis_overlap_rd_v: this is to study the reconstruction by smoothness method, depending on RD and overlap ratio (ratio = overlaping_timeticks/RD).
 
+analysis_paper_figure_gen: this is to generate all the figures in our paper draft.
+
 Execute and check analyse.m for more details. The functions are all placed in src/ and the data are all place in data/. 
 
 For any questions, please email me.

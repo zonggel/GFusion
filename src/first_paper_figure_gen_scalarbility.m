@@ -40,7 +40,7 @@ b = X\times2;
 % xlabel('Report Number')
 % ylabel('CPU time')
 figure;
-scatter(nticks,times2)
+scatter(nticks,times2, 'filled')
 hold on
 yCalc2 = X*b;
 plot(nticks,yCalc2,'--')

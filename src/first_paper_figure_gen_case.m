@@ -13,13 +13,13 @@ mask(1:num_kept) = 1;
 mask(end+1-num_kept:end) = 1;
 %mask = abs(fm) > max(abs(fm))/30;
 smooth = ifft(mask.*fm);
-figure(1);
-plot(ny_measles);
-hold on;
-plot(real(smooth),'r');
-legend('exact','smooth approximation, after FT thresholding'); figure(2);
-stem(mask);
-title('frequencies kept')
+% figure(1);
+% plot(ny_measles);
+% hold on;
+% plot(real(smooth),'r');
+% legend('exact','smooth approximation, after FT thresholding'); figure(2);
+% stem(mask);
+% title('frequencies kept')
 
 %So you see, your signal is indeed very sparse in the Fourier domain.
 
@@ -57,10 +57,13 @@ hold on
 plot(phat,'k')
 hold on
 plot(smoothhat,'r')
+xlabel('Event ID')
+ylabel('Count')
+grid on
 %hold on;
 %plot(cov,zeros(length(cov)),'b+');
 legend('Truth','Pseudo-Inverse','Smoothness');
-title(sprintf('case: rn = %d, rd = %d',rn,rd));
+title(sprintf('Case: N = %d, D = %d',rn,rd));
 
 
 figure;
@@ -72,10 +75,13 @@ hold on
 plot(smoothhat,'r')
 hold on
 plot(sphat,'m')
+xlabel('Event ID')
+ylabel('Count')
+grid on
 %hold on;
 %plot(cov,zeros(length(cov)),'b+');
 legend('Truth','Pseudo-Inverse','Smoothness','Peroidicity');
-title(sprintf('case: rn = %d, rd = %d',rn,rd));
+title(sprintf('Case: N = %d, D = %d',rn,rd));
 
 
 
@@ -92,8 +98,12 @@ plot(smoothhat,'r')
 %hold on;
 %plot(cov,zeros(length(cov)),'b+');
 legend('Truth','Muffle','Smoothness');
-title(sprintf('case: rn = %d, rd = %d',rn,rd));
-
+xlabel('Event ID')
+ylabel('Count')
+grid on
+%hold on;
+%plot(cov,zeros(length(cov)),'b+');
+title(sprintf('Case: N = %d, D = %d',rn,rd));
 
 
 
